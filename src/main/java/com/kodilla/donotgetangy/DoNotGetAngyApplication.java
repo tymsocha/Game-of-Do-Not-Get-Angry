@@ -1,11 +1,14 @@
 package com.kodilla.donotgetangy;
 
 import javafx.application.Application;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -13,6 +16,8 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+
+import java.util.List;
 
 
 public class DoNotGetAngyApplication extends Application {
@@ -47,40 +52,17 @@ public class DoNotGetAngyApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        BackgroundSize backgroundSize = new BackgroundSize(100, 100, true, true, true, false);
-        BackgroundImage backgroundImage = new BackgroundImage(board, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, backgroundSize);
-        Background background = new Background(backgroundImage);
 
         GridPane grid = new GridPane();
-        //grid.setAlignment(Pos.BOTTOM_LEFT);
         grid.setHgap(17);
         grid.setVgap(16);
         grid.setPadding(new Insets(40, 22, 22, 45));
-        grid.setBackground(background);
+        grid.setBackground(SetBackGround.setNewBackground(board));
 
-        grid.getColumnConstraints().add(new ColumnConstraints(59));
-        grid.getColumnConstraints().add(new ColumnConstraints(59));
-        grid.getColumnConstraints().add(new ColumnConstraints(59));
-        grid.getColumnConstraints().add(new ColumnConstraints(59));
-        grid.getColumnConstraints().add(new ColumnConstraints(59));
-        grid.getColumnConstraints().add(new ColumnConstraints(59));
-        grid.getColumnConstraints().add(new ColumnConstraints(59));
-        grid.getColumnConstraints().add(new ColumnConstraints(59));
-        grid.getColumnConstraints().add(new ColumnConstraints(59));
-        grid.getColumnConstraints().add(new ColumnConstraints(59));
-        grid.getColumnConstraints().add(new ColumnConstraints(59));
+        Board board = new Board();
+        board.setBoard(grid);
 
-        grid.getRowConstraints().add(new RowConstraints(59));
-        grid.getRowConstraints().add(new RowConstraints(59));
-        grid.getRowConstraints().add(new RowConstraints(59));
-        grid.getRowConstraints().add(new RowConstraints(59));
-        grid.getRowConstraints().add(new RowConstraints(59));
-        grid.getRowConstraints().add(new RowConstraints(59));
-        grid.getRowConstraints().add(new RowConstraints(59));
-        grid.getRowConstraints().add(new RowConstraints(59));
-        grid.getRowConstraints().add(new RowConstraints(59));
-        grid.getRowConstraints().add(new RowConstraints(59));
-        grid.getRowConstraints().add(new RowConstraints(59));
+        List<Field> userMap = MapOfUserFields.getListOfUserMovements();
 
         ImageView redPawn1 = new ImageView(redOne);
         ImageView redPawn2 = new ImageView(redTwo);
@@ -117,10 +99,12 @@ public class DoNotGetAngyApplication extends Application {
         grid.add(greenPawn3, 9,10);
         grid.add(greenPawn4,10,10);
 
-        grid.add(yellowPawn1, 0,9);
+        grid.add(yellowPawn1, userMap.get(0).getColumn(), userMap.get(0).getRow());
         grid.add(yellowPawn2,1,9);
         grid.add(yellowPawn3,0,10);
-        grid.add(yellowPawn4,1,10);
+        grid.add(yellowPawn4, 1,10);
+
+        grid.getChildren().remove(yellowPawn1);
 
         Scene scene = new Scene(grid, 1200, 900, Color.WHITE);
 
