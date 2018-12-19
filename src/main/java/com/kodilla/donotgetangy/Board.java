@@ -9,7 +9,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class Board {
 
@@ -57,17 +60,48 @@ public class Board {
         ImageView yellowPawn3Image = yellowPawn3.getPawnImage();
         ImageView yellowPawn4Image = yellowPawn4.getPawnImage();
 
-        grid.add(bluePawn1.getPawnImage(), 9, 0);
-        grid.add(bluePawn2.getPawnImage(),10,0);
-        grid.add(bluePawn3.getPawnImage(), 9,1);
-        grid.add(bluePawn4.getPawnImage(),10,1);
+        ImageView bluePawn1Image = bluePawn1.getPawnImage();
+        ImageView bluePawn2Image = bluePawn2.getPawnImage();
+        ImageView bluePawn3Image = bluePawn3.getPawnImage();
+        ImageView bluePawn4Image = bluePawn4.getPawnImage();
 
+        grid.add(bluePawn1Image,9, 0);
+        UserMovesList bluePawnOneMovementsList = new UserMovesList();
+        bluePawnOneMovementsList.addToUserMovesList(bluePawn1Image);
+
+        grid.add(bluePawn2Image,10,0);
+        UserMovesList bluePawnTwoMovementsList = new UserMovesList();
+        bluePawnTwoMovementsList.addToUserMovesList(bluePawn2Image);
+
+        grid.add(bluePawn3Image, 9,1);
+        UserMovesList bluePawnThreeMovementsList = new UserMovesList();
+        bluePawnThreeMovementsList.addToUserMovesList(bluePawn3Image);
+
+        grid.add(bluePawn4Image,10,1);
+        UserMovesList bluePawnFourMovementsList = new UserMovesList();
+        bluePawnFourMovementsList.addToUserMovesList(bluePawn4Image);
+
+        List<Pawn> computersPawnsList = new ArrayList<>();
+        computersPawnsList.add(0,bluePawn1);
+        computersPawnsList.add(1,bluePawn2);
+        computersPawnsList.add(2,bluePawn3);
+        computersPawnsList.add(3,bluePawn4);
 
         grid.add(yellowPawn1Image, 0,9);
-        UserMovesList.addToUserMovesList(yellowPawn1Image);
+        UserMovesList yellowPawnOneMovementsList = new UserMovesList();
+        yellowPawnOneMovementsList.addToUserMovesList(yellowPawn1Image);
+
         grid.add(yellowPawn2Image,1,9);
+        UserMovesList yellowPawnTwoMovementsList = new UserMovesList();
+        yellowPawnTwoMovementsList.addToUserMovesList(yellowPawn2Image);
+
         grid.add(yellowPawn3Image,0,10);
+        UserMovesList yellowPawnThreeMovementsList = new UserMovesList();
+        yellowPawnThreeMovementsList.addToUserMovesList(yellowPawn3Image);
+
         grid.add(yellowPawn4Image, 1,10);
+        UserMovesList yellowPawnFourMovementsList = new UserMovesList();
+        yellowPawnFourMovementsList.addToUserMovesList(yellowPawn4Image);
 
         Button rollTheDice = new Button();
         rollTheDice.setPadding(new Insets(10));
@@ -77,53 +111,112 @@ public class Board {
         TextField showDiceRoll = new TextField();
         grid.add(showDiceRoll,13,2);
 
+        Label chooseThePawn = new Label();
+        chooseThePawn.setText("Choose the Pawn you want to move:");
+        chooseThePawn.setMinSize(1000,10);
+
+        Button pawnNrOne = new Button();
+        pawnNrOne.setBackground(SetBackGround.setNewBackground(yellowOne));
+        pawnNrOne.setMinSize(63,59);
+
+        Button pawnNrTwo = new Button();
+        pawnNrTwo.setBackground(SetBackGround.setNewBackground(yellowTwo));
+        pawnNrTwo.setMinSize(63,59);
+
+        Button pawnNrThree = new Button();
+        pawnNrThree.setBackground(SetBackGround.setNewBackground(yellowThree));
+        pawnNrThree.setMinSize(63,59);
+
+        Button pawnNrFour = new Button();
+        pawnNrFour.setBackground(SetBackGround.setNewBackground(yellowFour));
+        pawnNrFour.setMinSize(63,59);
+
+        Label computerRoll = new Label();
+        computerRoll.setText("Computer rolled:");
+        computerRoll.setMinSize(1000,10);
+
+        TextField showComputerRoll = new TextField();
+
+        Label computerPawnChoiceLabel = new Label();
+        computerPawnChoiceLabel.setText("Computer chose:");
+        computerPawnChoiceLabel.setMinSize(1000,10);
+
+        TextField computerPawnChoiceTextBox = new TextField();
+        computerPawnChoiceTextBox.setMinSize(100,10);
+
         rollTheDice.setOnAction(event -> {
+            this.removeMenu(grid, pawnNrOne, pawnNrTwo, pawnNrThree, pawnNrFour, chooseThePawn, computerRoll, showComputerRoll, computerPawnChoiceLabel, computerPawnChoiceTextBox);
             showDiceRoll.setText("");
             int diceRoll = DiceRoll.rollTheDice();
             showDiceRoll.setText(Integer.toString(diceRoll));
 
-            Label chooseThePawn = new Label();
-            chooseThePawn.setText("Choose the Pawn you want to move:");
-            chooseThePawn.setMinSize(1000,10);
             grid.add(chooseThePawn, 11,3);
-
-            Button pawnNrOne = new Button();
-            pawnNrOne.setBackground(SetBackGround.setNewBackground(yellowOne));
-            pawnNrOne.setMinSize(63,59);
             grid.add(pawnNrOne, 11,4);
-
-            Button pawnNrTwo = new Button();
-            pawnNrTwo.setBackground(SetBackGround.setNewBackground(yellowTwo));
-            pawnNrTwo.setMinSize(63,59);
             grid.add(pawnNrTwo, 12,4);
-
-            Button pawnNrThree = new Button();
-            pawnNrThree.setBackground(SetBackGround.setNewBackground(yellowThree));
-            pawnNrThree.setMinSize(63,59);
             grid.add(pawnNrThree, 13,4);
-
-            Button pawnNrFour = new Button();
-            pawnNrFour.setBackground(SetBackGround.setNewBackground(yellowFour));
-            pawnNrFour.setMinSize(63,59);
             grid.add(pawnNrFour, 14,4);
 
             pawnNrOne.setOnAction(event1 -> {
-                Movement.moveThePawn(grid, yellowPawn1, diceRoll);
-                this.removeMenu(grid, pawnNrOne);
-                this.removeMenu(grid, pawnNrTwo);
-                this.removeMenu(grid, pawnNrThree);
-                this.removeMenu(grid, pawnNrFour);
-                this.removeMenu(grid, chooseThePawn);
+                Movement.moveTheUserPawn(grid, yellowPawn1, diceRoll, yellowPawnOneMovementsList);
+
+                grid.add(computerRoll, 11, 5);
+
+                grid.add(showComputerRoll,13,5);
+                showComputerRoll.setText("");
+                int computerDiceRoll = DiceRoll.rollTheDice();
+                showComputerRoll.setText(Integer.toString(computerDiceRoll));
+
+                grid.add(computerPawnChoiceLabel,11,6);
+                grid.add(computerPawnChoiceTextBox,13,6);
+
+                int computerPawnChoice = new Random().nextInt(4);
+                Pawn pawnChosenByComputer;
+                UserMovesList computerMovementsList;
+                if (computerPawnChoice == 0) {
+                    pawnChosenByComputer = computersPawnsList.get(computerPawnChoice);
+                    computerMovementsList = bluePawnOneMovementsList;
+                    computerPawnChoiceTextBox.setText("");
+                    computerPawnChoiceTextBox.setText("Pawn nr 1");
+                } else if (computerPawnChoice == 1) {
+                    pawnChosenByComputer = computersPawnsList.get(computerPawnChoice);
+                    computerMovementsList = bluePawnTwoMovementsList;
+                    computerPawnChoiceTextBox.setText("");
+                    computerPawnChoiceTextBox.setText("Pawn nr 2");
+                } else if (computerPawnChoice == 2) {
+                    pawnChosenByComputer = computersPawnsList.get(computerPawnChoice);
+                    computerMovementsList = bluePawnThreeMovementsList;
+                    computerPawnChoiceTextBox.setText("");
+                    computerPawnChoiceTextBox.setText("Pawn nr 3");
+                } else {
+                    pawnChosenByComputer = computersPawnsList.get(computerPawnChoice);
+                    computerMovementsList = bluePawnFourMovementsList;
+                    computerPawnChoiceTextBox.setText("");
+                    computerPawnChoiceTextBox.setText("Pawn nr 4");
+                }
+
+                Movement.moveTheComputerPawn(grid, pawnChosenByComputer,computerDiceRoll,computerMovementsList);
             });
 
-            pawnNrTwo.setOnAction(event2 -> Movement.moveThePawn(grid, yellowPawn2, diceRoll));
+           pawnNrTwo.setOnAction(event1 -> {
+                Movement.moveTheUserPawn(grid, yellowPawn2, diceRoll, yellowPawnTwoMovementsList);
+                this.removeMenu(grid, pawnNrOne, pawnNrTwo, pawnNrThree, pawnNrFour, chooseThePawn);
+            });
 
+           pawnNrThree.setOnAction(event1 -> {
+               Movement.moveTheUserPawn(grid, yellowPawn3, diceRoll, yellowPawnThreeMovementsList);
+               this.removeMenu(grid, pawnNrOne, pawnNrTwo, pawnNrThree, pawnNrFour, chooseThePawn);
+           });
+
+           pawnNrFour.setOnAction(event1 -> {
+               Movement.moveTheUserPawn(grid, yellowPawn4, diceRoll, yellowPawnFourMovementsList);
+               this.removeMenu(grid, pawnNrOne, pawnNrTwo, pawnNrThree, pawnNrFour, chooseThePawn);
+           });
 
         });
 
     }
 
-    public void removeMenu(GridPane grid, Node node) {
-        grid.getChildren().remove(node);
+    public void removeMenu(GridPane grid, Node... node) {
+        grid.getChildren().removeAll(node);
     }
 }

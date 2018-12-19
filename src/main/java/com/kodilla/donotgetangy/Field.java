@@ -16,4 +16,6 @@ public class Field {
     public int getRow() {
         return row;
     }
+
+    // Field should also have a method that returns if it is occupied or not
 }
