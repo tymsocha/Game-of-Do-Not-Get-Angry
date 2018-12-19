@@ -1,11 +1,15 @@
 package com.kodilla.donotgetangy;
 
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+
+import java.util.List;
 
 public class Board {
 
@@ -40,44 +44,30 @@ public class Board {
     private Pawn yellowPawn4 = new YellowPawn(new Field(1,10), yellowFour);
 
     public void setBoard (GridPane grid) {
-        grid.getColumnConstraints().add(new ColumnConstraints(59));
-        grid.getColumnConstraints().add(new ColumnConstraints(59));
-        grid.getColumnConstraints().add(new ColumnConstraints(59));
-        grid.getColumnConstraints().add(new ColumnConstraints(59));
-        grid.getColumnConstraints().add(new ColumnConstraints(59));
-        grid.getColumnConstraints().add(new ColumnConstraints(59));
-        grid.getColumnConstraints().add(new ColumnConstraints(59));
-        grid.getColumnConstraints().add(new ColumnConstraints(59));
-        grid.getColumnConstraints().add(new ColumnConstraints(59));
-        grid.getColumnConstraints().add(new ColumnConstraints(59));
-        grid.getColumnConstraints().add(new ColumnConstraints(59));
-        grid.getColumnConstraints().add(new ColumnConstraints(59));
-        grid.getColumnConstraints().add(new ColumnConstraints(63));
-        grid.getColumnConstraints().add(new ColumnConstraints(63));
-        grid.getColumnConstraints().add(new ColumnConstraints(63));
-        grid.getColumnConstraints().add(new ColumnConstraints(63));
+        for (int i = 0; i < 11; i++){
+            grid.getColumnConstraints().add(new ColumnConstraints(59));
+            grid.getRowConstraints().add(new RowConstraints(59));
+        }
+        for (int i = 0; i < 4; i++) {
+            grid.getColumnConstraints().add(new ColumnConstraints(63));
+        }
 
-        grid.getRowConstraints().add(new RowConstraints(59));
-        grid.getRowConstraints().add(new RowConstraints(59));
-        grid.getRowConstraints().add(new RowConstraints(59));
-        grid.getRowConstraints().add(new RowConstraints(59));
-        grid.getRowConstraints().add(new RowConstraints(59));
-        grid.getRowConstraints().add(new RowConstraints(59));
-        grid.getRowConstraints().add(new RowConstraints(59));
-        grid.getRowConstraints().add(new RowConstraints(59));
-        grid.getRowConstraints().add(new RowConstraints(59));
-        grid.getRowConstraints().add(new RowConstraints(59));
-        grid.getRowConstraints().add(new RowConstraints(59));
+        ImageView yellowPawn1Image = yellowPawn1.getPawnImage();
+        ImageView yellowPawn2Image = yellowPawn2.getPawnImage();
+        ImageView yellowPawn3Image = yellowPawn3.getPawnImage();
+        ImageView yellowPawn4Image = yellowPawn4.getPawnImage();
 
         grid.add(bluePawn1.getPawnImage(), 9, 0);
         grid.add(bluePawn2.getPawnImage(),10,0);
         grid.add(bluePawn3.getPawnImage(), 9,1);
         grid.add(bluePawn4.getPawnImage(),10,1);
 
-        grid.add(yellowPawn1.getPawnImage(), 0,9);
-        grid.add(yellowPawn2.getPawnImage(),1,9);
-        grid.add(yellowPawn3.getPawnImage(),0,10);
-        grid.add(yellowPawn4.getPawnImage(), 1,10);
+
+        grid.add(yellowPawn1Image, 0,9);
+        UserMovesList.addToUserMovesList(yellowPawn1Image);
+        grid.add(yellowPawn2Image,1,9);
+        grid.add(yellowPawn3Image,0,10);
+        grid.add(yellowPawn4Image, 1,10);
 
         Button rollTheDice = new Button();
         rollTheDice.setPadding(new Insets(10));
@@ -102,7 +92,6 @@ public class Board {
             pawnNrOne.setMinSize(63,59);
             grid.add(pawnNrOne, 11,4);
 
-
             Button pawnNrTwo = new Button();
             pawnNrTwo.setBackground(SetBackGround.setNewBackground(yellowTwo));
             pawnNrTwo.setMinSize(63,59);
@@ -118,9 +107,23 @@ public class Board {
             pawnNrFour.setMinSize(63,59);
             grid.add(pawnNrFour, 14,4);
 
-            pawnNrOne.setOnAction(event1 -> Movement.moveThePawn(grid, yellowPawn1, diceRoll));
+            pawnNrOne.setOnAction(event1 -> {
+                Movement.moveThePawn(grid, yellowPawn1, diceRoll);
+                this.removeMenu(grid, pawnNrOne);
+                this.removeMenu(grid, pawnNrTwo);
+                this.removeMenu(grid, pawnNrThree);
+                this.removeMenu(grid, pawnNrFour);
+                this.removeMenu(grid, chooseThePawn);
+            });
+
+            pawnNrTwo.setOnAction(event2 -> Movement.moveThePawn(grid, yellowPawn2, diceRoll));
+
 
         });
 
+    }
+
+    public void removeMenu(GridPane grid, Node node) {
+        grid.getChildren().remove(node);
     }
 }

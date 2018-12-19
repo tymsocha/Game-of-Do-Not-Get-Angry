@@ -15,8 +15,10 @@ public class Movement {
                 indexOfCurrentField = i;
             }
         }
-        grid.getChildren().remove(pawn.getPawnImage());
-        grid.add(pawn.getPawnImage(), movementList.get(indexOfCurrentField + diceRoll).getColumn(), movementList.get(indexOfCurrentField + diceRoll).getRow());
+        grid.getChildren().remove(UserMovesList.getUserMovesList().get(UserMovesList.getUserMovesList().size() - 1));
+        ImageView pawnImage = pawn.getPawnImage();
+        UserMovesList.addToUserMovesList(pawnImage);
+        grid.add(pawnImage, movementList.get(indexOfCurrentField + diceRoll).getColumn(), movementList.get(indexOfCurrentField + diceRoll).getRow());
         pawn.setNewPosition(movementList.get(indexOfCurrentField + diceRoll));
     }
 }
