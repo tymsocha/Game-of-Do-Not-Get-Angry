@@ -115,22 +115,22 @@ public class Board {
             grid.add(pawnNrFour, 14,4);
 
             pawnNrOne.setOnAction(event1 -> {
-                Movement.moveTheUserPawn(grid, userPawnOne, diceRoll, userPawnOneMovementsList);
+                Movement.moveThePawn(grid, userPawnOne, diceRoll, userPawnOneMovementsList, MapOfUserFields.getListOfUserMovements());
                 PawnButtonAction.moveComputerPawn(grid, computerPawnOneMovementsList, computerPawnTwoMovementsList, computerPawnThreeMovementsList, computerPawnFourMovementsList, computersPawnsList);
             });
 
             pawnNrTwo.setOnAction(event1 -> {
-                Movement.moveTheUserPawn(grid, userPawnTwo, diceRoll, userPawnTwoMovementsList);
+                Movement.moveThePawn(grid, userPawnTwo, diceRoll, userPawnTwoMovementsList, MapOfUserFields.getListOfUserMovements());
                 PawnButtonAction.moveComputerPawn(grid, computerPawnOneMovementsList, computerPawnTwoMovementsList, computerPawnThreeMovementsList, computerPawnFourMovementsList, computersPawnsList);
             });
 
             pawnNrThree.setOnAction(event1 -> {
-               Movement.moveTheUserPawn(grid, userPawnThree, diceRoll, userPawnThreeMovementsList);
+               Movement.moveThePawn(grid, userPawnThree, diceRoll, userPawnThreeMovementsList, MapOfUserFields.getListOfUserMovements());
                PawnButtonAction.moveComputerPawn(grid, computerPawnOneMovementsList, computerPawnTwoMovementsList, computerPawnThreeMovementsList, computerPawnFourMovementsList, computersPawnsList);
            });
 
             pawnNrFour.setOnAction(event1 -> {
-               Movement.moveTheUserPawn(grid, userPawnFour, diceRoll, userPawnFourMovementsList);
+               Movement.moveThePawn(grid, userPawnFour, diceRoll, userPawnFourMovementsList, MapOfUserFields.getListOfUserMovements());
                PawnButtonAction.moveComputerPawn(grid, computerPawnOneMovementsList, computerPawnTwoMovementsList, computerPawnThreeMovementsList, computerPawnFourMovementsList, computersPawnsList);
            });
         });
