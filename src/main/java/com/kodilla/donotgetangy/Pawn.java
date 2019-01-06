@@ -6,9 +6,8 @@ import java.util.List;
 
 public interface Pawn {
     PawnColor getColor();
-    boolean goToGame(int number);
+    //boolean isActive();
     Field getCurrentField();
     ImageView getPawnImage();
-    //List<Field> getPositionList();
     void setNewPosition(Field field);
 }

@@ -5,103 +5,73 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-import java.util.concurrent.TimeUnit;
+
 
 public class Board {
+    public void setBoard (GridPane grid, PawnColor pawnColor, PawnColor computerColor) {
+        PawnStorage pawnStorage = new PawnStorage();
 
-    private static Image yellowOne = new Image("file:E:/Dokumenty/Kodilla/Kodilla-Projects/do-not-get-angy/src/main/images/YellowOne.jpg");
-    private Image yellowTwo = new Image("file:E:/Dokumenty/Kodilla/Kodilla-Projects/do-not-get-angy/src/main/images/YellowTwo.jpg");
-    private Image yellowThree = new Image("file:E:/Dokumenty/Kodilla/Kodilla-Projects/do-not-get-angy/src/main/images/YellowThree.jpg");
-    private Image yellowFour = new Image("file:E:/Dokumenty/Kodilla/Kodilla-Projects/do-not-get-angy/src/main/images/YellowFour.jpg");
+        Pawn userPawnOne = pawnStorage.getUserPawn(pawnColor, 1);
+        Pawn userPawnTwo = pawnStorage.getUserPawn(pawnColor, 2);
+        Pawn userPawnThree = pawnStorage.getUserPawn(pawnColor, 3);
+        Pawn userPawnFour = pawnStorage.getUserPawn(pawnColor, 4);
 
-    private Image blueOne = new Image("file:E:/Dokumenty/Kodilla/Kodilla-Projects/do-not-get-angy/src/main/images/BlueOne.jpg");
-    private Image blueTwo = new Image("file:E:/Dokumenty/Kodilla/Kodilla-Projects/do-not-get-angy/src/main/images/BlueTwo.jpg");
-    private Image blueThree = new Image("file:E:/Dokumenty/Kodilla/Kodilla-Projects/do-not-get-angy/src/main/images/BlueThree.jpg");
-    private Image blueFour = new Image("file:E:/Dokumenty/Kodilla/Kodilla-Projects/do-not-get-angy/src/main/images/BlueFour.jpg");
+        Pawn computerPawnOne = pawnStorage.getUserPawn(computerColor, 1);
+        Pawn computerPawnTwo = pawnStorage.getUserPawn(computerColor, 2);
+        Pawn computerPawnThree = pawnStorage.getUserPawn(computerColor, 3);
+        Pawn computerPawnFour = pawnStorage.getUserPawn(computerColor, 4);
 
-    private Image redOne = new Image("file:E:/Dokumenty/Kodilla/Kodilla-Projects/do-not-get-angy/src/main/images/RedOne.jpg");
-    private Image redTwo = new Image("file:E:/Dokumenty/Kodilla/Kodilla-Projects/do-not-get-angy/src/main/images/RedTwo.jpg");
-    private Image redThree = new Image("file:E:/Dokumenty/Kodilla/Kodilla-Projects/do-not-get-angy/src/main/images/RedThree.jpg");
-    private Image redFour = new Image("file:E:/Dokumenty/Kodilla/Kodilla-Projects/do-not-get-angy/src/main/images/RedFour.jpg");
+        ImageView userPawn1Image = userPawnOne.getPawnImage();
+        ImageView userPawn2Image = userPawnTwo.getPawnImage();
+        ImageView userPawn3Image = userPawnThree.getPawnImage();
+        ImageView userPawn4Image = userPawnFour.getPawnImage();
 
-    private Image greenOne = new Image("file:E:/Dokumenty/Kodilla/Kodilla-Projects/do-not-get-angy/src/main/images/GreenOne.jpg");
-    private Image greenTwo = new Image("file:E:/Dokumenty/Kodilla/Kodilla-Projects/do-not-get-angy/src/main/images/GreenTwo.jpg");
-    private Image greenThree = new Image("file:E:/Dokumenty/Kodilla/Kodilla-Projects/do-not-get-angy/src/main/images/GreenThree.jpg");
-    private Image greenFour = new Image("file:E:/Dokumenty/Kodilla/Kodilla-Projects/do-not-get-angy/src/main/images/GreenFour.jpg");
+        ImageView computerPawn1Image = computerPawnOne.getPawnImage();
+        ImageView computerPawn2Image = computerPawnTwo.getPawnImage();
+        ImageView computerPawn3Image = computerPawnThree.getPawnImage();
+        ImageView computerPawn4Image = computerPawnFour.getPawnImage();
 
-    private Pawn bluePawn1 = new BluePawn(new Field(9,0), blueOne);
-    private Pawn bluePawn2 = new BluePawn(new Field(10,0), blueTwo);
-    private Pawn bluePawn3 = new BluePawn(new Field(9,1), blueThree);
-    private Pawn bluePawn4 = new BluePawn(new Field(10,1), blueFour);
+        grid.add(computerPawn1Image,9, 0);
+        UserMovesList computerPawnOneMovementsList = new UserMovesList();
+        computerPawnOneMovementsList.addToUserMovesList(computerPawn1Image);
 
-    private Pawn yellowPawn1 = new YellowPawn(new Field(0, 9), yellowOne);
-    private Pawn yellowPawn2 = new YellowPawn(new Field(1, 9), yellowTwo);
-    private Pawn yellowPawn3 = new YellowPawn(new Field(0,10), yellowThree);
-    private Pawn yellowPawn4 = new YellowPawn(new Field(1,10), yellowFour);
+        grid.add(computerPawn2Image,10,0);
+        UserMovesList computerPawnTwoMovementsList = new UserMovesList();
+        computerPawnTwoMovementsList.addToUserMovesList(computerPawn2Image);
 
-    public void setBoard (GridPane grid) {
-        for (int i = 0; i < 11; i++){
-            grid.getColumnConstraints().add(new ColumnConstraints(59));
-            grid.getRowConstraints().add(new RowConstraints(59));
-        }
-        for (int i = 0; i < 4; i++) {
-            grid.getColumnConstraints().add(new ColumnConstraints(63));
-        }
+        grid.add(computerPawn3Image, 9,1);
+        UserMovesList computerPawnThreeMovementsList = new UserMovesList();
+        computerPawnThreeMovementsList.addToUserMovesList(computerPawn3Image);
 
-        ImageView yellowPawn1Image = yellowPawn1.getPawnImage();
-        ImageView yellowPawn2Image = yellowPawn2.getPawnImage();
-        ImageView yellowPawn3Image = yellowPawn3.getPawnImage();
-        ImageView yellowPawn4Image = yellowPawn4.getPawnImage();
-
-        ImageView bluePawn1Image = bluePawn1.getPawnImage();
-        ImageView bluePawn2Image = bluePawn2.getPawnImage();
-        ImageView bluePawn3Image = bluePawn3.getPawnImage();
-        ImageView bluePawn4Image = bluePawn4.getPawnImage();
-
-        grid.add(bluePawn1Image,9, 0);
-        UserMovesList bluePawnOneMovementsList = new UserMovesList();
-        bluePawnOneMovementsList.addToUserMovesList(bluePawn1Image);
-
-        grid.add(bluePawn2Image,10,0);
-        UserMovesList bluePawnTwoMovementsList = new UserMovesList();
-        bluePawnTwoMovementsList.addToUserMovesList(bluePawn2Image);
-
-        grid.add(bluePawn3Image, 9,1);
-        UserMovesList bluePawnThreeMovementsList = new UserMovesList();
-        bluePawnThreeMovementsList.addToUserMovesList(bluePawn3Image);
-
-        grid.add(bluePawn4Image,10,1);
-        UserMovesList bluePawnFourMovementsList = new UserMovesList();
-        bluePawnFourMovementsList.addToUserMovesList(bluePawn4Image);
+        grid.add(computerPawn4Image,10,1);
+        UserMovesList computerPawnFourMovementsList = new UserMovesList();
+        computerPawnFourMovementsList.addToUserMovesList(computerPawn4Image);
 
         List<Pawn> computersPawnsList = new ArrayList<>();
-        computersPawnsList.add(0,bluePawn1);
-        computersPawnsList.add(1,bluePawn2);
-        computersPawnsList.add(2,bluePawn3);
-        computersPawnsList.add(3,bluePawn4);
+        computersPawnsList.add(0,computerPawnOne);
+        computersPawnsList.add(1,computerPawnTwo);
+        computersPawnsList.add(2,computerPawnThree);
+        computersPawnsList.add(3,computerPawnFour);
 
-        grid.add(yellowPawn1Image, 0,9);
-        UserMovesList yellowPawnOneMovementsList = new UserMovesList();
-        yellowPawnOneMovementsList.addToUserMovesList(yellowPawn1Image);
+        grid.add(userPawn1Image, 0,9);
+        UserMovesList userPawnOneMovementsList = new UserMovesList();
+        userPawnOneMovementsList.addToUserMovesList(userPawn1Image);
 
-        grid.add(yellowPawn2Image,1,9);
-        UserMovesList yellowPawnTwoMovementsList = new UserMovesList();
-        yellowPawnTwoMovementsList.addToUserMovesList(yellowPawn2Image);
+        grid.add(userPawn2Image,1,9);
+        UserMovesList userPawnTwoMovementsList = new UserMovesList();
+        userPawnTwoMovementsList.addToUserMovesList(userPawn2Image);
 
-        grid.add(yellowPawn3Image,0,10);
-        UserMovesList yellowPawnThreeMovementsList = new UserMovesList();
-        yellowPawnThreeMovementsList.addToUserMovesList(yellowPawn3Image);
+        grid.add(userPawn3Image,0,10);
+        UserMovesList userPawnThreeMovementsList = new UserMovesList();
+        userPawnThreeMovementsList.addToUserMovesList(userPawn3Image);
 
-        grid.add(yellowPawn4Image, 1,10);
-        UserMovesList yellowPawnFourMovementsList = new UserMovesList();
-        yellowPawnFourMovementsList.addToUserMovesList(yellowPawn4Image);
+        grid.add(userPawn4Image, 1,10);
+        UserMovesList userPawnFourMovementsList = new UserMovesList();
+        userPawnFourMovementsList.addToUserMovesList(userPawn4Image);
 
         Button rollTheDice = new Button();
         rollTheDice.setPadding(new Insets(10));
@@ -116,36 +86,24 @@ public class Board {
         chooseThePawn.setMinSize(1000,10);
 
         Button pawnNrOne = new Button();
-        pawnNrOne.setBackground(SetBackGround.setNewBackground(yellowOne));
+        pawnNrOne.setBackground(SetBackGround.setNewBackground(pawnStorage.getPawnImage(pawnColor,1)));
         pawnNrOne.setMinSize(63,59);
 
         Button pawnNrTwo = new Button();
-        pawnNrTwo.setBackground(SetBackGround.setNewBackground(yellowTwo));
+        pawnNrTwo.setBackground(SetBackGround.setNewBackground(pawnStorage.getPawnImage(pawnColor,2)));
         pawnNrTwo.setMinSize(63,59);
 
         Button pawnNrThree = new Button();
-        pawnNrThree.setBackground(SetBackGround.setNewBackground(yellowThree));
+        pawnNrThree.setBackground(SetBackGround.setNewBackground(pawnStorage.getPawnImage(pawnColor,3)));
         pawnNrThree.setMinSize(63,59);
 
         Button pawnNrFour = new Button();
-        pawnNrFour.setBackground(SetBackGround.setNewBackground(yellowFour));
+        pawnNrFour.setBackground(SetBackGround.setNewBackground(pawnStorage.getPawnImage(pawnColor,4)));
         pawnNrFour.setMinSize(63,59);
 
-        Label computerRoll = new Label();
-        computerRoll.setText("Computer rolled:");
-        computerRoll.setMinSize(1000,10);
-
-        TextField showComputerRoll = new TextField();
-
-        Label computerPawnChoiceLabel = new Label();
-        computerPawnChoiceLabel.setText("Computer chose:");
-        computerPawnChoiceLabel.setMinSize(1000,10);
-
-        TextField computerPawnChoiceTextBox = new TextField();
-        computerPawnChoiceTextBox.setMinSize(100,10);
 
         rollTheDice.setOnAction(event -> {
-            this.removeMenu(grid, pawnNrOne, pawnNrTwo, pawnNrThree, pawnNrFour, chooseThePawn, computerRoll, showComputerRoll, computerPawnChoiceLabel, computerPawnChoiceTextBox);
+            this.removeMenu(grid, pawnNrOne, pawnNrTwo, pawnNrThree, pawnNrFour, chooseThePawn);
             showDiceRoll.setText("");
             int diceRoll = DiceRoll.rollTheDice();
             showDiceRoll.setText(Integer.toString(diceRoll));
@@ -157,61 +115,24 @@ public class Board {
             grid.add(pawnNrFour, 14,4);
 
             pawnNrOne.setOnAction(event1 -> {
-                Movement.moveTheUserPawn(grid, yellowPawn1, diceRoll, yellowPawnOneMovementsList);
-
-                grid.add(computerRoll, 11, 5);
-
-                grid.add(showComputerRoll,13,5);
-                showComputerRoll.setText("");
-                int computerDiceRoll = DiceRoll.rollTheDice();
-                showComputerRoll.setText(Integer.toString(computerDiceRoll));
-
-                grid.add(computerPawnChoiceLabel,11,6);
-                grid.add(computerPawnChoiceTextBox,13,6);
-
-                int computerPawnChoice = new Random().nextInt(4);
-                Pawn pawnChosenByComputer;
-                UserMovesList computerMovementsList;
-                if (computerPawnChoice == 0) {
-                    pawnChosenByComputer = computersPawnsList.get(computerPawnChoice);
-                    computerMovementsList = bluePawnOneMovementsList;
-                    computerPawnChoiceTextBox.setText("");
-                    computerPawnChoiceTextBox.setText("Pawn nr 1");
-                } else if (computerPawnChoice == 1) {
-                    pawnChosenByComputer = computersPawnsList.get(computerPawnChoice);
-                    computerMovementsList = bluePawnTwoMovementsList;
-                    computerPawnChoiceTextBox.setText("");
-                    computerPawnChoiceTextBox.setText("Pawn nr 2");
-                } else if (computerPawnChoice == 2) {
-                    pawnChosenByComputer = computersPawnsList.get(computerPawnChoice);
-                    computerMovementsList = bluePawnThreeMovementsList;
-                    computerPawnChoiceTextBox.setText("");
-                    computerPawnChoiceTextBox.setText("Pawn nr 3");
-                } else {
-                    pawnChosenByComputer = computersPawnsList.get(computerPawnChoice);
-                    computerMovementsList = bluePawnFourMovementsList;
-                    computerPawnChoiceTextBox.setText("");
-                    computerPawnChoiceTextBox.setText("Pawn nr 4");
-                }
-
-                Movement.moveTheComputerPawn(grid, pawnChosenByComputer,computerDiceRoll,computerMovementsList);
+                Movement.moveTheUserPawn(grid, userPawnOne, diceRoll, userPawnOneMovementsList);
+                PawnButtonAction.moveComputerPawn(grid, computerPawnOneMovementsList, computerPawnTwoMovementsList, computerPawnThreeMovementsList, computerPawnFourMovementsList, computersPawnsList);
             });
 
-           pawnNrTwo.setOnAction(event1 -> {
-                Movement.moveTheUserPawn(grid, yellowPawn2, diceRoll, yellowPawnTwoMovementsList);
-                this.removeMenu(grid, pawnNrOne, pawnNrTwo, pawnNrThree, pawnNrFour, chooseThePawn);
+            pawnNrTwo.setOnAction(event1 -> {
+                Movement.moveTheUserPawn(grid, userPawnTwo, diceRoll, userPawnTwoMovementsList);
+                PawnButtonAction.moveComputerPawn(grid, computerPawnOneMovementsList, computerPawnTwoMovementsList, computerPawnThreeMovementsList, computerPawnFourMovementsList, computersPawnsList);
             });
 
-           pawnNrThree.setOnAction(event1 -> {
-               Movement.moveTheUserPawn(grid, yellowPawn3, diceRoll, yellowPawnThreeMovementsList);
-               this.removeMenu(grid, pawnNrOne, pawnNrTwo, pawnNrThree, pawnNrFour, chooseThePawn);
+            pawnNrThree.setOnAction(event1 -> {
+               Movement.moveTheUserPawn(grid, userPawnThree, diceRoll, userPawnThreeMovementsList);
+               PawnButtonAction.moveComputerPawn(grid, computerPawnOneMovementsList, computerPawnTwoMovementsList, computerPawnThreeMovementsList, computerPawnFourMovementsList, computersPawnsList);
            });
 
-           pawnNrFour.setOnAction(event1 -> {
-               Movement.moveTheUserPawn(grid, yellowPawn4, diceRoll, yellowPawnFourMovementsList);
-               this.removeMenu(grid, pawnNrOne, pawnNrTwo, pawnNrThree, pawnNrFour, chooseThePawn);
+            pawnNrFour.setOnAction(event1 -> {
+               Movement.moveTheUserPawn(grid, userPawnFour, diceRoll, userPawnFourMovementsList);
+               PawnButtonAction.moveComputerPawn(grid, computerPawnOneMovementsList, computerPawnTwoMovementsList, computerPawnThreeMovementsList, computerPawnFourMovementsList, computersPawnsList);
            });
-
         });
 
     }
