@@ -5,26 +5,19 @@ import javafx.scene.image.ImageView;
 
 public class RedPawn implements Pawn{
     private PawnColor color;
-    private boolean isInGame;
+    private boolean activationStatus;
     private Field currentField;
     private Image pawnImage;
 
     public RedPawn(Field currentField, Image pawnImage) {
         this.color = PawnColor.RED;
-        this.isInGame = false;
+        this.activationStatus = false;
         this.currentField = currentField;
         this.pawnImage = pawnImage;
     }
 
     public PawnColor getColor() {
         return color;
-    }
-
-    public boolean goToGame(int number) {
-        if(number == 1 || number == 6) {
-            isInGame = true;
-        }
-        return isInGame;
     }
 
     public Field getCurrentField() {
@@ -38,5 +31,18 @@ public class RedPawn implements Pawn{
 
     public void setNewPosition(Field field) {
         this.currentField = field;
+    }
+
+    public boolean getActivationStatus() {
+        return activationStatus;
+    }
+
+    public boolean changeActivationStatus() {
+        if (activationStatus == true) {
+            activationStatus = false;
+        } else {
+            activationStatus = true;
+        }
+        return activationStatus;
     }
 }

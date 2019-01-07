@@ -52,33 +52,33 @@ public final class PawnStorage {
             }
         } else if (pawnNumber == 2) {
             if(pawnColor.equals(PawnColor.RED)) {
-                pawn = new RedPawn(userStartFieldOne, redTwo);
+                pawn = new RedPawn(userStartFieldTwo, redTwo);
             } else if (pawnColor.equals(PawnColor.BLUE)) {
-                pawn = new BluePawn(userStartFieldOne, blueTwo);
+                pawn = new BluePawn(userStartFieldTwo, blueTwo);
             } else if (pawnColor.equals(PawnColor.GREEN)) {
-                pawn = new GreenPawn(userStartFieldOne, greenTwo);
+                pawn = new GreenPawn(userStartFieldTwo, greenTwo);
             } else {
-                pawn = new YellowPawn(userStartFieldOne, yellowTwo);
+                pawn = new YellowPawn(userStartFieldTwo, yellowTwo);
             }
         } else if (pawnNumber == 3) {
             if(pawnColor.equals(PawnColor.RED)) {
-                pawn = new RedPawn(userStartFieldOne, redThree);
+                pawn = new RedPawn(userStartFieldThree, redThree);
             } else if (pawnColor.equals(PawnColor.BLUE)) {
-                pawn = new BluePawn(userStartFieldOne, blueThree);
+                pawn = new BluePawn(userStartFieldThree, blueThree);
             } else if (pawnColor.equals(PawnColor.GREEN)) {
-                pawn = new GreenPawn(userStartFieldOne, greenThree);
+                pawn = new GreenPawn(userStartFieldThree, greenThree);
             } else {
-                pawn = new YellowPawn(userStartFieldOne, yellowThree);
+                pawn = new YellowPawn(userStartFieldThree, yellowThree);
             }
         } else {
             if(pawnColor.equals(PawnColor.RED)) {
-                pawn = new RedPawn(userStartFieldOne, redFour);
+                pawn = new RedPawn(userStartFieldFour, redFour);
             } else if (pawnColor.equals(PawnColor.BLUE)) {
-                pawn = new BluePawn(userStartFieldOne, blueFour);
+                pawn = new BluePawn(userStartFieldFour, blueFour);
             } else if (pawnColor.equals(PawnColor.GREEN)) {
-                pawn = new GreenPawn(userStartFieldOne, greenFour);
+                pawn = new GreenPawn(userStartFieldFour, greenFour);
             } else {
-                pawn = new YellowPawn(userStartFieldOne, yellowFour);
+                pawn = new YellowPawn(userStartFieldFour, yellowFour);
             }
         }
         return pawn;

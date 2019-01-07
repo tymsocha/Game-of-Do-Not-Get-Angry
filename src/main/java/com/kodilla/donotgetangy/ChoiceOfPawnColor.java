@@ -45,7 +45,7 @@ public class ChoiceOfPawnColor {
             grid.getRowConstraints().add(new RowConstraints(55));
         }
         for (int i = 0; i < 4; i++) {
-            grid.getColumnConstraints().add(new ColumnConstraints(63));
+            grid.getColumnConstraints().add(new ColumnConstraints(70));
         }
         blueChoice.setOnAction(event -> {
             color = PawnColor.BLUE;

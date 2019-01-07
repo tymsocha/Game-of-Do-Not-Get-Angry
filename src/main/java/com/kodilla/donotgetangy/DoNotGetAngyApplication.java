@@ -24,7 +24,7 @@ public class DoNotGetAngyApplication extends Application {
         ChoiceOfPawnColor.putChoosingColorButtonsOnTheGrid(grid);
         ChoiceOfPawnColor.choosePawnColor(grid);
 
-        Scene scene = new Scene(grid, 1200, 900, Color.WHITE);
+        Scene scene = new Scene(grid, 1250, 850, Color.WHITE);
 
         primaryStage.setTitle("Do Not Get Angry");
         primaryStage.setScene(scene);

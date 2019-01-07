@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MapOfUserFields {
-    private static List<Field> listOfUserMovements = new ArrayList<>();
+    private static ArrayList<Field> listOfUserMovements = new ArrayList<>();
 
-    public static List<Field> getListOfUserMovements() {
+    public static ArrayList<Field> getListOfUserMovements() {
         listOfUserMovements.add(0, new Field(4,10));
         listOfUserMovements.add(1, new Field(4,9));
         listOfUserMovements.add(2, new Field(4,8));
