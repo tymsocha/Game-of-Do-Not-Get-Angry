@@ -6,7 +6,7 @@ import java.util.List;
 public class MapOfUserFields {
     private static ArrayList<Field> listOfUserMovements = new ArrayList<>();
 
-    public static ArrayList<Field> getListOfUserMovements() {
+    public static void addListOfUserMovements() {
         listOfUserMovements.add(0, new Field(4,10));
         listOfUserMovements.add(1, new Field(4,9));
         listOfUserMovements.add(2, new Field(4,8));
@@ -52,7 +52,9 @@ public class MapOfUserFields {
         listOfUserMovements.add(41, new Field(5,8));
         listOfUserMovements.add(42, new Field(5,7));
         listOfUserMovements.add(43, new Field(5,6));
+    }
 
+    public static ArrayList<Field> getListOfUserMovements() {
         return listOfUserMovements;
     }
 }

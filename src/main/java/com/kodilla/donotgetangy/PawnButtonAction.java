@@ -58,7 +58,7 @@ public class PawnButtonAction {
             computerPawnChoiceTextBox.setText("Pawn nr 4");
         }
 
-        //Movement.moveThePawn(grid, pawnChosenByComputer,computerDiceRoll,computerMovementsList, MapOfComputerFields.getListOfUserMovements());
+        Movement.moveThePawn(grid, pawnChosenByComputer,computerDiceRoll,computerMovementsList, MapOfComputerFields.getListOfUserMovements());
     }
 
     public static void removeMenu(GridPane grid, Node... node) {

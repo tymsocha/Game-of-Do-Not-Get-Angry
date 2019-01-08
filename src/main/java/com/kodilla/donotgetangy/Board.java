@@ -115,24 +115,40 @@ public class Board {
             grid.add(pawnNrFour, 14,4);
 
             pawnNrOne.setOnAction(event1 -> {
-                Movement.moveThePawn(grid, userPawnOne, diceRoll, userPawnOneMovementsList, MapOfUserFields.getListOfUserMovements());
-                PawnButtonAction.moveComputerPawn(grid, computerPawnOneMovementsList, computerPawnTwoMovementsList, computerPawnThreeMovementsList, computerPawnFourMovementsList, computersPawnsList);
-            });
+                try {
+                    Movement.moveThePawn(grid, userPawnOne, diceRoll, userPawnOneMovementsList, MapOfUserFields.getListOfUserMovements());
+                    PawnButtonAction.moveComputerPawn(grid, computerPawnOneMovementsList, computerPawnTwoMovementsList, computerPawnThreeMovementsList, computerPawnFourMovementsList, computersPawnsList);
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("Choose another pawn or roll again");
+                }
+                });
 
             pawnNrTwo.setOnAction(event1 -> {
-                Movement.moveThePawn(grid, userPawnTwo, diceRoll, userPawnTwoMovementsList, MapOfUserFields.getListOfUserMovements());
-                PawnButtonAction.moveComputerPawn(grid, computerPawnOneMovementsList, computerPawnTwoMovementsList, computerPawnThreeMovementsList, computerPawnFourMovementsList, computersPawnsList);
+                try {
+                    Movement.moveThePawn(grid, userPawnTwo, diceRoll, userPawnTwoMovementsList, MapOfUserFields.getListOfUserMovements());
+                    PawnButtonAction.moveComputerPawn(grid, computerPawnOneMovementsList, computerPawnTwoMovementsList, computerPawnThreeMovementsList, computerPawnFourMovementsList, computersPawnsList);
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("Choose another pawn or roll again");
+                }
             });
 
             pawnNrThree.setOnAction(event1 -> {
-               Movement.moveThePawn(grid, userPawnThree, diceRoll, userPawnThreeMovementsList, MapOfUserFields.getListOfUserMovements());
-               PawnButtonAction.moveComputerPawn(grid, computerPawnOneMovementsList, computerPawnTwoMovementsList, computerPawnThreeMovementsList, computerPawnFourMovementsList, computersPawnsList);
-           });
+                try {
+                    Movement.moveThePawn(grid, userPawnThree, diceRoll, userPawnThreeMovementsList, MapOfUserFields.getListOfUserMovements());
+                    PawnButtonAction.moveComputerPawn(grid, computerPawnOneMovementsList, computerPawnTwoMovementsList, computerPawnThreeMovementsList, computerPawnFourMovementsList, computersPawnsList);
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("Choose another pawn or roll again");
+                }
+            });
 
             pawnNrFour.setOnAction(event1 -> {
-               Movement.moveThePawn(grid, userPawnFour, diceRoll, userPawnFourMovementsList, MapOfUserFields.getListOfUserMovements());
-               PawnButtonAction.moveComputerPawn(grid, computerPawnOneMovementsList, computerPawnTwoMovementsList, computerPawnThreeMovementsList, computerPawnFourMovementsList, computersPawnsList);
-           });
+                try {
+                    Movement.moveThePawn(grid, userPawnFour, diceRoll, userPawnFourMovementsList, MapOfUserFields.getListOfUserMovements());
+                    PawnButtonAction.moveComputerPawn(grid, computerPawnOneMovementsList, computerPawnTwoMovementsList, computerPawnThreeMovementsList, computerPawnFourMovementsList, computersPawnsList);
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("Choose another pawn or roll again");
+                }
+            });
         });
 
     }

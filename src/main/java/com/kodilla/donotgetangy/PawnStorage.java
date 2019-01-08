@@ -28,15 +28,25 @@ public final class PawnStorage {
     private static final Image boardBlue = new Image("file:E:/Dokumenty/Kodilla/Kodilla-Projects/do-not-get-angy/src/main/images/BoardBlue.jpg");
     private static final Image boardGreen = new Image("file:E:/Dokumenty/Kodilla/Kodilla-Projects/do-not-get-angy/src/main/images/BoardGreen.jpg");
 
-    private final Field userStartFieldOne = new Field(0, 9);
-    private final Field userStartFieldTwo = new Field(1, 9);
-    private final Field userStartFieldThree = new Field(0, 10);
-    private final Field userStartFieldFour = new Field(0, 10);
+    private static final Field userStartFieldOne = new Field(0, 9);
+    private static final Field userStartFieldTwo = new Field(1, 9);
+    private static final Field userStartFieldThree = new Field(0, 10);
+    private static final Field userStartFieldFour = new Field(0, 10);
 
-    private final Field computerStartFieldOne = new Field(9, 1);
-    private final Field computerStartFieldTwo = new Field(10, 1);
-    private final Field computerStartFieldThree = new Field(9, 0);
-    private final Field computerStartFieldFour = new Field(10, 0);
+    private static final Field computerStartFieldOne = new Field(9, 1);
+    private static final Field computerStartFieldTwo = new Field(10, 1);
+    private static final Field computerStartFieldThree = new Field(9, 0);
+    private static final Field computerStartFieldFour = new Field(10, 0);
+
+    private static final Field userFinishFieldOne = new Field(5, 9);
+    private static final Field userFinishFieldTwo = new Field(5, 8);
+    private static final Field userFinishFieldThree = new Field(5, 7);
+    private static final Field userFinishFieldFour = new Field(5, 6);
+
+    private static final Field computerFinishFieldOne = new Field(5, 1);
+    private static final Field computerFinishFieldTwo = new Field(5, 2);
+    private static final Field computerFinishFieldThree = new Field(5, 3);
+    private static final Field computerFinishFieldFour = new Field(5, 4);
 
     public Pawn getUserPawn(PawnColor pawnColor, int pawnNumber) {
         Pawn pawn;
@@ -130,32 +140,64 @@ public final class PawnStorage {
         return pawn;
     }
 
-    public Field getUserStartFieldOne() { return userStartFieldOne; }
+    public static final Field getUserStartFieldOne() { return userStartFieldOne; }
 
-    public Field getUserStartFieldTwo() {
+    public static final Field getUserStartFieldTwo() {
         return userStartFieldTwo;
     }
 
-    public Field getUserStartFieldThree() { return userStartFieldThree; }
+    public static final Field getUserStartFieldThree() { return userStartFieldThree; }
 
-    public Field getUserStartFieldFour() {
+    public static final Field getUserStartFieldFour() {
         return userStartFieldFour;
     }
 
-    public Field getComputerStartFieldOne() {
+    public static final Field getComputerStartFieldOne() {
         return computerStartFieldOne;
     }
 
-    public Field getComputerStartFieldTwo() {
+    public static final Field getComputerStartFieldTwo() {
         return computerStartFieldTwo;
     }
 
-    public Field getComputerStartFieldThree() {
+    public static final Field getComputerStartFieldThree() {
         return computerStartFieldThree;
     }
 
-    public Field getComputerStartFieldFour() {
+    public static final Field getComputerStartFieldFour() {
         return computerStartFieldFour;
+    }
+
+    public static Field getUserFinishFieldOne() {
+        return userFinishFieldOne;
+    }
+
+    public static Field getUserFinishFieldTwo() {
+        return userFinishFieldTwo;
+    }
+
+    public static Field getUserFinishFieldThree() {
+        return userFinishFieldThree;
+    }
+
+    public static Field getUserFinishFieldFour() {
+        return userFinishFieldFour;
+    }
+
+    public static Field getComputerFinishFieldOne() {
+        return computerFinishFieldOne;
+    }
+
+    public static Field getComputerFinishFieldTwo() {
+        return computerFinishFieldTwo;
+    }
+
+    public static Field getComputerFinishFieldThree() {
+        return computerFinishFieldThree;
+    }
+
+    public static Field getComputerFinishFieldFour() {
+        return computerFinishFieldFour;
     }
 
     public static Image getBoardYellow() {

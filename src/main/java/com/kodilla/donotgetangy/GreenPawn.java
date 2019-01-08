@@ -8,6 +8,7 @@ public class GreenPawn implements Pawn {
     private boolean activationStatus;
     private Field currentField;
     private Image pawnImage;
+    private int previousMovement = 0;
 
     public GreenPawn(Field currentField, Image pawnImage) {
         this.activationStatus = false;
@@ -44,4 +45,14 @@ public class GreenPawn implements Pawn {
         }
         return activationStatus;
     }
+
+    public void rememberMovement(int movement) {
+        previousMovement = movement;
+    }
+
+    public int getPreviousMovement() {
+        return previousMovement;
+    }
+
+
 }

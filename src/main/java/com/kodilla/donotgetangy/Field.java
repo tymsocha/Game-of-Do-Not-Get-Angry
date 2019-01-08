@@ -1,9 +1,12 @@
 package com.kodilla.donotgetangy;
 
+import java.util.ArrayList;
+
 public class Field {
     private int column;
     private int row;
     private static boolean occupied = false;
+    private static int fieldIndex;
 
     public Field(int column, int row) {
         this.column = column;
@@ -29,6 +32,15 @@ public class Field {
             occupied = false;
         }
         return occupied;
+    }
+
+    public static int getFieldIndex(Pawn pawn, ArrayList<Field> mapOfFields) {
+        for (int i = 0; i < mapOfFields.size(); i++) {
+            if (pawn.getCurrentField().equals(mapOfFields.get(i))) {
+                fieldIndex = i;
+            }
+        }
+        return fieldIndex;
     }
 
     // Field should also have a method that returns if it is occupied or not

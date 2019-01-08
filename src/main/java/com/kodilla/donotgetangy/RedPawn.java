@@ -8,6 +8,7 @@ public class RedPawn implements Pawn{
     private boolean activationStatus;
     private Field currentField;
     private Image pawnImage;
+    private int previousMovement = 0;
 
     public RedPawn(Field currentField, Image pawnImage) {
         this.color = PawnColor.RED;
@@ -44,5 +45,13 @@ public class RedPawn implements Pawn{
             activationStatus = true;
         }
         return activationStatus;
+    }
+
+    public void rememberMovement(int movement) {
+        previousMovement = movement;
+    }
+
+    public int getPreviousMovement() {
+        return previousMovement;
     }
 }
