@@ -57,4 +57,14 @@ public class MapOfUserFields {
     public static ArrayList<Field> getListOfUserMovements() {
         return listOfUserMovements;
     }
+
+    public static int getIndexOfCurrentField(ArrayList<Field> movementList, Field pawnCurrentField) {
+        int indexOfCurrentField = 0;
+        for (int i = 0; i < movementList.size(); i++) {
+            if (pawnCurrentField == movementList.get(i)) {
+                indexOfCurrentField = i;
+            }
+        }
+        return indexOfCurrentField;
+    }
 }

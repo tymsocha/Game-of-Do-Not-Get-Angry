@@ -33,20 +33,20 @@ public class PawnButtonAction {
         int computerDiceRoll = DiceRoll.rollTheDice();
         showComputerRoll.setText(Integer.toString(computerDiceRoll));
 
-        int computerPawnChoice = new Random().nextInt(4);
+        int computerPawnChoice = new Random().nextInt(4) + 1;
         Pawn pawnChosenByComputer;
         UserMovesList computerMovementsList;
-        if (computerPawnChoice == 0) {
+        if (computerPawnChoice == 1) {
             pawnChosenByComputer = computerPawnsList.get(computerPawnChoice);
             computerMovementsList =  computerPawnMovesListOne;
             computerPawnChoiceTextBox.setText("");
             computerPawnChoiceTextBox.setText("Pawn nr 1");
-        } else if (computerPawnChoice == 1) {
+        } else if (computerPawnChoice == 2) {
             pawnChosenByComputer = computerPawnsList.get(computerPawnChoice);
             computerMovementsList = computerPawnMovesListTwo;
             computerPawnChoiceTextBox.setText("");
             computerPawnChoiceTextBox.setText("Pawn nr 2");
-        } else if (computerPawnChoice == 2) {
+        } else if (computerPawnChoice == 3) {
             pawnChosenByComputer = computerPawnsList.get(computerPawnChoice);
             computerMovementsList = computerPawnMovesListThree;
             computerPawnChoiceTextBox.setText("");
@@ -63,5 +63,25 @@ public class PawnButtonAction {
 
     public static void removeMenu(GridPane grid, Node... node) {
         grid.getChildren().removeAll(node);
+    }
+
+    private static int checkComputerPawnStatusAndChangePawnChoice(int computerPawnChoice, Pawn pawnChosenByComputer) {
+        boolean leaveTheLoop = true;
+        int newComputerPawnChoice = 0;
+        while (leaveTheLoop) {
+            if (pawnChosenByComputer.getActivationStatus() == true) {
+                newComputerPawnChoice = computerPawnChoice;
+                leaveTheLoop = false;
+            } else if (pawnChosenByComputer.getActivationStatus() == false && computerPawnChoice < 4) {
+                newComputerPawnChoice = computerPawnChoice + 1;
+                leaveTheLoop = false;
+            } else if (pawnChosenByComputer.getActivationStatus() == false && computerPawnChoice == 4) {
+                newComputerPawnChoice = 0;
+                leaveTheLoop = false;
+            } else {
+                leaveTheLoop = false;
+            }
+        }
+        return newComputerPawnChoice;
     }
 }

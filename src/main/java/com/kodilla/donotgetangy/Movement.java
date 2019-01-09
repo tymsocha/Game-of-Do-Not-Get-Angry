@@ -1,5 +1,6 @@
 package com.kodilla.donotgetangy;
 
+import javafx.scene.control.Alert;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
@@ -7,40 +8,60 @@ import java.util.ArrayList;
 
 public class Movement {
     public static void moveThePawn(GridPane grid, Pawn pawn, int diceRoll, UserMovesList list, ArrayList<Field> mapOfMovements) {
+        tryToChangeActivationStatus(pawn, diceRoll);
+        Field pawnCurrentField = pawn.getCurrentField();
+
+        if(pawn.getActivationStatus() == true) {
+            int indexOfCurrentField = MapOfUserFields.getIndexOfCurrentField(mapOfMovements, pawnCurrentField);
+            ImageView pawnImage = removePawnImageFromTheBoard(grid, list, pawn, pawnCurrentField);
+
+            if (indexOfCurrentField + diceRoll <= mapOfMovements.size() - 1) {
+                addPawnOnBoardInNewPosition(grid, pawnImage, mapOfMovements, indexOfCurrentField, diceRoll, pawn);
+            } else {
+                addPawnOnTheLastAvailableFinishingField(grid, pawnImage, mapOfMovements, pawn);
+            }
+
+        } else {
+            throw new IndexOutOfBoundsException();
+        }
+    }
+
+    private static void tryToChangeActivationStatus(Pawn pawn, int diceRoll) {
         if (pawn.getActivationStatus() == false) {
             if (diceRoll == 1 || diceRoll == 6) {
                 pawn.changeActivationStatus();
             }
         }
-        if(pawn.getActivationStatus() == true) {
-            ArrayList<Field> movementList = mapOfMovements;
-            Field pawnCurrentField = pawn.getCurrentField();
-            int indexOfCurrentField = 0;
-            for (int i = 0; i < movementList.size(); i++) {
-                if (pawnCurrentField == movementList.get(i)) {
-                    indexOfCurrentField = i;
-                }
-            }
-            System.out.println("Index: " + indexOfCurrentField);
-            grid.getChildren().remove(list.getUserMovesList().get(list.getUserMovesList().size() - 1));
-            pawnCurrentField.changeFieldStatus();
-            ImageView pawnImage = pawn.getPawnImage();
-            list.addToUserMovesList(pawnImage);
-            if (indexOfCurrentField + diceRoll <= movementList.size() - 1) {
-                grid.add(pawnImage, movementList.get(indexOfCurrentField + diceRoll).getColumn(), movementList.get(indexOfCurrentField + diceRoll).getRow());
-                pawn.setNewPosition(movementList.get(indexOfCurrentField + diceRoll));
-                pawn.getCurrentField().changeFieldStatus();
-                pawn.rememberMovement(diceRoll);
-            } else {
-                grid.add(pawnImage, mapOfMovements.get(mapOfMovements.size() - 1).getColumn(), mapOfMovements.get(mapOfMovements.size() - 1).getRow());
-                pawn.setNewPosition(mapOfMovements.get(mapOfMovements.size() - 1));
-                pawn.getCurrentField().changeFieldStatus();
-                mapOfMovements.remove(mapOfMovements.size() - 1);
-                pawn.changeActivationStatus();
-            }
-        } else {
-            throw new IndexOutOfBoundsException();
-        }
+    }
 
+    private static ImageView removePawnImageFromTheBoard(GridPane grid, UserMovesList list, Pawn pawn, Field pawnCurrentField) {
+        grid.getChildren().remove(list.getUserMovesList().get(list.getUserMovesList().size() - 1));
+        pawnCurrentField.changeFieldStatus();
+        ImageView pawnImage = pawn.getPawnImage();
+        list.addToUserMovesList(pawnImage);
+        return pawnImage;
+    }
+
+    private static void addPawnOnBoardInNewPosition(GridPane grid, ImageView pawnImage, ArrayList<Field> movementList, int indexOfCurrentField, int diceRoll, Pawn pawn) {
+        grid.add(pawnImage, movementList.get(indexOfCurrentField + diceRoll).getColumn(), movementList.get(indexOfCurrentField + diceRoll).getRow());
+        pawn.setNewPosition(movementList.get(indexOfCurrentField + diceRoll));
+        pawn.getCurrentField().changeFieldStatus();
+        pawn.rememberMovement(diceRoll);
+    }
+
+    private static void addPawnOnTheLastAvailableFinishingField(GridPane grid, ImageView pawnImage, ArrayList<Field> mapOfMovements, Pawn pawn) {
+        grid.add(pawnImage, mapOfMovements.get(mapOfMovements.size() - 1).getColumn(), mapOfMovements.get(mapOfMovements.size() - 1).getRow());
+        pawn.setNewPosition(mapOfMovements.get(mapOfMovements.size() - 1));
+        pawn.getCurrentField().changeFieldStatus();
+        mapOfMovements.remove(mapOfMovements.size() - 1);
+        pawn.changeActivationStatus();
+    }
+
+    public static void showMessageThatPawnCannotMove() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("WRONG CHOICE");
+        alert.setHeaderText("This Pawn Cannot Be Moved");
+        alert.setContentText("Choose another pawn or end turn");
+        alert.showAndWait();
     }
 }

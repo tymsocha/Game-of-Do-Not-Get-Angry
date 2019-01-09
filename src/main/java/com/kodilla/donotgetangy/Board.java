@@ -101,6 +101,11 @@ public class Board {
         pawnNrFour.setBackground(SetBackGround.setNewBackground(pawnStorage.getPawnImage(pawnColor,4)));
         pawnNrFour.setMinSize(63,59);
 
+        Button endTurn = new Button();
+        endTurn.setText("End Turn");
+        endTurn.setMinSize(100,20);
+        grid.add(endTurn, 12,8);
+
 
         rollTheDice.setOnAction(event -> {
             this.removeMenu(grid, pawnNrOne, pawnNrTwo, pawnNrThree, pawnNrFour, chooseThePawn);
@@ -119,7 +124,7 @@ public class Board {
                     Movement.moveThePawn(grid, userPawnOne, diceRoll, userPawnOneMovementsList, MapOfUserFields.getListOfUserMovements());
                     PawnButtonAction.moveComputerPawn(grid, computerPawnOneMovementsList, computerPawnTwoMovementsList, computerPawnThreeMovementsList, computerPawnFourMovementsList, computersPawnsList);
                 } catch (IndexOutOfBoundsException e) {
-                    System.out.println("Choose another pawn or roll again");
+                    Movement.showMessageThatPawnCannotMove();
                 }
                 });
 
@@ -128,7 +133,7 @@ public class Board {
                     Movement.moveThePawn(grid, userPawnTwo, diceRoll, userPawnTwoMovementsList, MapOfUserFields.getListOfUserMovements());
                     PawnButtonAction.moveComputerPawn(grid, computerPawnOneMovementsList, computerPawnTwoMovementsList, computerPawnThreeMovementsList, computerPawnFourMovementsList, computersPawnsList);
                 } catch (IndexOutOfBoundsException e) {
-                    System.out.println("Choose another pawn or roll again");
+                    Movement.showMessageThatPawnCannotMove();
                 }
             });
 
@@ -137,7 +142,7 @@ public class Board {
                     Movement.moveThePawn(grid, userPawnThree, diceRoll, userPawnThreeMovementsList, MapOfUserFields.getListOfUserMovements());
                     PawnButtonAction.moveComputerPawn(grid, computerPawnOneMovementsList, computerPawnTwoMovementsList, computerPawnThreeMovementsList, computerPawnFourMovementsList, computersPawnsList);
                 } catch (IndexOutOfBoundsException e) {
-                    System.out.println("Choose another pawn or roll again");
+                    Movement.showMessageThatPawnCannotMove();
                 }
             });
 
@@ -146,11 +151,14 @@ public class Board {
                     Movement.moveThePawn(grid, userPawnFour, diceRoll, userPawnFourMovementsList, MapOfUserFields.getListOfUserMovements());
                     PawnButtonAction.moveComputerPawn(grid, computerPawnOneMovementsList, computerPawnTwoMovementsList, computerPawnThreeMovementsList, computerPawnFourMovementsList, computersPawnsList);
                 } catch (IndexOutOfBoundsException e) {
-                    System.out.println("Choose another pawn or roll again");
+                    Movement.showMessageThatPawnCannotMove();
                 }
             });
         });
 
+        endTurn.setOnAction(event -> {
+            PawnButtonAction.moveComputerPawn(grid, computerPawnOneMovementsList, computerPawnTwoMovementsList, computerPawnThreeMovementsList, computerPawnFourMovementsList, computersPawnsList);
+        });
     }
 
     public void removeMenu(GridPane grid, Node... node) {
