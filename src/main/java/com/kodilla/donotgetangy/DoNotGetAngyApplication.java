@@ -21,6 +21,7 @@ public class DoNotGetAngyApplication extends Application {
         grid.setPadding(new Insets(40, 22, 22, 45));
         grid.setBackground(SetBackGround.setNewBackground(PawnStorage.getBoardYellow()));
 
+        MapOfFinishingFields.addListOfFinishingMovements();
         MapOfUserFields.addListOfUserMovements();
         MapOfComputerFields.addListOfUserMovements();
 

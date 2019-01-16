@@ -8,13 +8,14 @@ public class GreenPawn implements Pawn {
     private boolean activationStatus;
     private Field currentField;
     private Image pawnImage;
-    private int previousMovement = 0;
+    private boolean finishStatus;
 
     public GreenPawn(Field currentField, Image pawnImage) {
         this.activationStatus = false;
         this.color = PawnColor.GREEN;
         this.currentField = currentField;
         this.pawnImage = pawnImage;
+        this.finishStatus = false;
     }
 
     public PawnColor getColor() {
@@ -46,12 +47,17 @@ public class GreenPawn implements Pawn {
         return activationStatus;
     }
 
-    public void rememberMovement(int movement) {
-        previousMovement = movement;
+    public boolean getFinishStatus() {
+        return finishStatus;
     }
 
-    public int getPreviousMovement() {
-        return previousMovement;
+    public boolean changeFinishStatus() {
+        if (finishStatus == true) {
+            finishStatus = false;
+        } else {
+            finishStatus = true;
+        }
+        return finishStatus;
     }
 
 

@@ -11,6 +11,6 @@ public interface Pawn {
     Field getCurrentField();
     ImageView getPawnImage();
     void setNewPosition(Field field);
-    void rememberMovement(int number);
-    int getPreviousMovement();
+    boolean getFinishStatus();
+    boolean changeFinishStatus();
 }

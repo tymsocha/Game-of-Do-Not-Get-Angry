@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 
 public class Board {
@@ -122,7 +123,11 @@ public class Board {
             pawnNrOne.setOnAction(event1 -> {
                 try {
                     Movement.moveThePawn(grid, userPawnOne, diceRoll, userPawnOneMovementsList, MapOfUserFields.getListOfUserMovements());
-                    PawnButtonAction.moveComputerPawn(grid, computerPawnOneMovementsList, computerPawnTwoMovementsList, computerPawnThreeMovementsList, computerPawnFourMovementsList, computersPawnsList);
+                    try {
+                        PawnButtonAction.moveComputerPawn(grid, computerPawnOneMovementsList, computerPawnTwoMovementsList, computerPawnThreeMovementsList, computerPawnFourMovementsList, computersPawnsList);
+                    } catch (NoSuchElementException e) {
+                        PawnButtonAction.showMessageThatComputerPawnCannotMove();
+                    }
                 } catch (IndexOutOfBoundsException e) {
                     Movement.showMessageThatPawnCannotMove();
                 }
@@ -131,7 +136,11 @@ public class Board {
             pawnNrTwo.setOnAction(event1 -> {
                 try {
                     Movement.moveThePawn(grid, userPawnTwo, diceRoll, userPawnTwoMovementsList, MapOfUserFields.getListOfUserMovements());
-                    PawnButtonAction.moveComputerPawn(grid, computerPawnOneMovementsList, computerPawnTwoMovementsList, computerPawnThreeMovementsList, computerPawnFourMovementsList, computersPawnsList);
+                    try {
+                        PawnButtonAction.moveComputerPawn(grid, computerPawnOneMovementsList, computerPawnTwoMovementsList, computerPawnThreeMovementsList, computerPawnFourMovementsList, computersPawnsList);
+                    } catch (NoSuchElementException e) {
+                        PawnButtonAction.showMessageThatComputerPawnCannotMove();
+                    }
                 } catch (IndexOutOfBoundsException e) {
                     Movement.showMessageThatPawnCannotMove();
                 }
@@ -140,7 +149,11 @@ public class Board {
             pawnNrThree.setOnAction(event1 -> {
                 try {
                     Movement.moveThePawn(grid, userPawnThree, diceRoll, userPawnThreeMovementsList, MapOfUserFields.getListOfUserMovements());
-                    PawnButtonAction.moveComputerPawn(grid, computerPawnOneMovementsList, computerPawnTwoMovementsList, computerPawnThreeMovementsList, computerPawnFourMovementsList, computersPawnsList);
+                    try {
+                        PawnButtonAction.moveComputerPawn(grid, computerPawnOneMovementsList, computerPawnTwoMovementsList, computerPawnThreeMovementsList, computerPawnFourMovementsList, computersPawnsList);
+                    } catch (NoSuchElementException e) {
+                        PawnButtonAction.showMessageThatComputerPawnCannotMove();
+                    }
                 } catch (IndexOutOfBoundsException e) {
                     Movement.showMessageThatPawnCannotMove();
                 }
@@ -149,7 +162,11 @@ public class Board {
             pawnNrFour.setOnAction(event1 -> {
                 try {
                     Movement.moveThePawn(grid, userPawnFour, diceRoll, userPawnFourMovementsList, MapOfUserFields.getListOfUserMovements());
-                    PawnButtonAction.moveComputerPawn(grid, computerPawnOneMovementsList, computerPawnTwoMovementsList, computerPawnThreeMovementsList, computerPawnFourMovementsList, computersPawnsList);
+                    try {
+                        PawnButtonAction.moveComputerPawn(grid, computerPawnOneMovementsList, computerPawnTwoMovementsList, computerPawnThreeMovementsList, computerPawnFourMovementsList, computersPawnsList);
+                    } catch (NoSuchElementException e) {
+                        PawnButtonAction.showMessageThatComputerPawnCannotMove();
+                    }
                 } catch (IndexOutOfBoundsException e) {
                     Movement.showMessageThatPawnCannotMove();
                 }
